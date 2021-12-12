@@ -1,13 +1,16 @@
+import development as development
 from flask import Flask
 
 
 app = Flask(__name__)
-app.config['']
+app.config['Environment'] = development
+app.config['TESTING'] = True
+app.config['debug'] = True
 
-app.route('/')
+
+@app.route('/')
 def index():
-    return 'Parti!!'
-
+    return 'Index me'
 
 
 if __name__ == '__main__':
