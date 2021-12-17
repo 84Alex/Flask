@@ -1,16 +1,17 @@
-import development as development
-from flask import Flask
+from flask import Flask, render_template
+import random
 
 
 app = Flask(__name__)
-app.config['Environment'] = development
+app.config['ENV'] = 'development'
+app.config['DEBUG'] = True
 app.config['TESTING'] = True
-app.config['debug'] = True
+app.config['SECRET_KEY'] = random._urandom(24)
 
 
 @app.route('/')
 def index():
-    return 'Index me'
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
