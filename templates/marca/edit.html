@@ -1,0 +1,96 @@
+{% extends 'dashboard.html'%}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary">
+           <div class="d-flex justify-content-center">
+               <h2 class="mb-3 text-white">
+                   <i class="fas fa-list fa-fw me-1"></i>
+                   <b>Editar - Marca</b>
+               </h2>
+           </div>
+        </div>
+        <div class="card-body">
+             <form method="post" action="{{ url_for('marca_update') }}">
+                 {{ form.csrf_token }}
+                 <div class="row">
+                     <div class="col-9 mt-5 ml-5">
+                         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+                              <input type="text" id="create_at" class="form-control"
+                                     value="{{ row[3] }}">
+                              <label for="create_at">Fecha de Creacion</label>
+                              <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-9 mt-5 ml-5">
+                         <div class="md-form input-with-post-icon">
+                            <i class="fas fa-pencil-alt input-prefix"></i>
+                            {{ form.marca(class_="form-control", value_=(row[1])) }}
+                            <label>Marca</label>
+                         </div>
+                         {% if form.marca.erros %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                                <ul>
+                                     {% for error in form.marca.errors %}
+                                        <li>{{ error }}</li>
+                                     {% endfor %}
+                                </ul>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                         {% endif %}
+                     </div>
+                     <div class="row">
+                      <div class="col-9 mt-5 ml-5">
+                          <div class="md-form input-with-post-icon">
+                              <i class="fas fa-comment-dots input-prefix"></i>
+                              {{ form.description(class_="md-textarea form-control", rows='3') }}
+                              <label>Descripcion</label>
+                          </div>
+                          {% if form.description.errors %}
+                           <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      <strong>Ooooops!</strong>
+                                      <ul>
+                                         {% for error in form.description.errors %}
+                                          <li>{{ error }}</li>
+                                          {% endfor %}
+                                      </ul>
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                          {% endif %}
+                      </div>
+                 </div>
+                     <div class="row">
+                         <div class="col-9 mt-5 ml-5">
+                             <select class="browser-default custom-select" name="estado" id="estado">
+                                  {% if row[4] == 1 %}
+                                   <option value="{{ row[4] }}">Activa</option>
+                                  {% else %}
+                                   <option value="{{ row[4] }}">Inactiva</option>
+                                  {% endif %}
+                                 <option value="1">Activo</option>
+                                 <option value="2">Inactiva</option>
+                             </select>
+                         </div>
+                     </div>
+                  <div class="row">
+                    <div class="col-9 mt-5 ml-5 d-flex justify-content-center">
+                        <input type="hidden" class="form-control" name="id" id="id" value="{{ row[0] }}">
+                        <input type="hidden" class="form-control" name="cd" id="cd" value="{{ row[3] }}">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check-circle fa-fw-3"></i>
+                                <b>Actualizar</b>
+                        </button>
+                    </div>
+                  </div>
+             </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

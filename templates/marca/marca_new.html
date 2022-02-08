@@ -1,0 +1,78 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="card shadow-5">
+    <div class="card-header bg-primary">
+         <div class="d-flex justify-content-center">
+               <h2 class="mb-3 text-white">
+                   <i class="fas fa-plus-circle fa-fw me-1"></i>
+                   <b>Registro de Marcas</b>
+               </h2>
+           </div>
+    </div>
+    <div class="card-body">
+      <form method="post" action="{{ url_for('marca_store') }}">
+          {{ form.csrf_token }}
+           <div class="row">
+               <div class="col-9 mt-5 ml-5">
+                   <div class="md-form">
+                      <input type="text" id="date-picker-example" name="create_at" class="form-control datepicker" value="{{ cd.strftime('%d-%m-%Y') }}" autofocus>
+                      <label for="date-picker-example">Fecha de Creacion</label>
+                    </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-9 mt-5 ml-5">
+                   <div class="md-form input-with-post-icon">
+                         <i class="fas fa-pencil-alt input-prefix"></i>
+                          {{ form.marca(class_="form-control") }}
+                          <label>Marca</label>
+                   </div>
+                   {% if form.marca.erros %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                              <ul>
+                                 {% for error in form.marca.errors %}
+                                  <li>{{ error }}</li>
+                                  {% endfor %}
+                              </ul>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                   {% endif %}
+               </div>
+           </div>
+          <div class="row">
+              <div class="col-9 mt-5 ml-5">
+                  <div class="md-form input-with-post-icon">
+                      <i class="fas fa-comment-dots input-prefix"></i>
+                      {{ form.description(class_="md-textarea form-control", rows='3') }}
+                      <label>Descripcion</label>
+                  </div>
+                  {% if form.description.errors %}
+                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                              <ul>
+                                 {% for error in form.description.errors %}
+                                  <li>{{ error }}</li>
+                                  {% endfor %}
+                              </ul>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                  {% endif %}
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-9 mt-5 ml-5 d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                      <i class="fas fa-check-circle fa-fw-3"></i>
+                       <b>Registrar</b>
+                  </button>
+              </div>
+          </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

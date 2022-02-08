@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center mt-3">
+     {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                      {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                                <p>{{ message }}</p>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                        </div>
+                      {% endfor %}
+                {% endif %}
+                {% endwith %}
+</div>
+<div class="container mt-5">
+    <div class="card shadow-5">
+        <div class="card-header bg-primary text-center text-white">
+            <h3>
+                <span><i class="fas fa-sign-in-alt"></i></span>
+
+                Acceder al sistema Flask-Ventory
+            </h3>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ url_for('auth') }}">
+                {{ form.csrf_token }}
+                <div class="row">
+                    <div class="col-9 mt-5 ml-5">
+                        <div class="md-form input-with-post-icon">
+                            <i class="fas fa-user input-prefix"></i>
+                             {{ form.user(class_="form-control ", autofocus=autofocus) }}
+                             <label class="form-label">Usuario</label>
+                            <!-- Validator User -->
+                             {% if form.user.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                              <ul>
+                                 {% for error in form.user.errors %}
+                                  <li>{{ error }}</li>
+                                  {% endfor %}
+                              </ul>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9 mt-3 ml-5">
+                        <div class="md-form input-with-post-icon">
+                            <i class="fas fa-user-lock input-prefix"></i>
+                            {{ form.passw(class_="form-control")  }}
+                            <label class="form-label">Contraseña</label>
+                            <!-- Validate Password -->
+                            {% if form.passw.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ooooops!</strong>
+                              <ul>
+                                 {% for error in form.passw.errors %}
+                                  <li>{{ error }}</li>
+                                  {% endfor %}
+                              </ul>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9 mt-4 ml-5">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+                            <label class="form-check-label" for="inlineCheckbox1">Recordarme</label>
+                        </div>
+                        <a href="#" class="d-flex justify-content-end btn btn-link">Recuperar Contraseña</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9 mt-4 ms-5 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-rounded btn-lg">
+                             <b>Acceder a Flask-Ventory</b>
+                             <span>
+                                 <i class="fas fa-arrow-circle-right"></i>
+                             </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

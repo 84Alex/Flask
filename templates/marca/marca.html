@@ -1,0 +1,102 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center mt-3">
+     {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                      {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                              <strong>
+                                  <i class="fas fa-info-circle fa-fw me-1"></i>
+                                  Aviso
+                              </strong>
+                                <p>{{ message }}</p>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                        </div>
+                      {% endfor %}
+                {% endif %}
+                {% endwith %}
+</div>
+<div class="card">
+    <div class="card-header bg-primary">
+       <div class="d-flex justify-content-center">
+               <h2 class="mb-3 text-white">
+                   <i class="fas fa-list fa-fw me-1"></i>
+                   <b>Listado de Marcas</b>
+               </h2>
+           </div>
+    </div>
+    <div class="card-body">
+          <div class="d-flex justify-content-end">
+                <a href="{{ url_for('register_marca') }}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus-circle fa-fw me-1"></i>
+                    <span>
+                        <b>Nueva Marca</b>
+                    </span>
+                </a>
+            </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"># <span>ID</span></th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de Creacion</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+               <tr>
+                  <th scope="row">
+                    {{ row[0] }}
+                  </th>
+                  <td>
+                      <a href="{{ url_for('marca_show', id = row[0] ) }}" class="btn btn-link">
+                          {{ row[1] }}
+                      </a>
+                  </td>
+                  <td>
+                      {{ row[3] }}
+                  </td>
+                  <td>
+                     {% if row[4] == 1%}
+                     <div class="alert alert-success text-center" role="alert">
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                         Macra Activa
+                     </div>
+                      {% else %}
+                      <div class="alert alert-danger text-center" role="alert">
+                        <span>
+                            <i class="fas fa-exclamation-circle"></i>
+                        </span>
+                          Marca no Activa
+                      </div>
+                      {% endif %}
+                  </td>
+                   <td>
+                       <a href="{{ url_for('marca_edit', id=row[0]) }}" class="btn btn-warning btn-sm btn-raised">
+                           <i class="far fa-edit fa-fw-3"></i>
+                           Editar
+                       </a>
+                   </td>
+                   <td>
+                     <a href="{{ url_for('marca_delete', id=row[0]) }}" class="btn btn-danger btn-sm" id="">
+                         <i class="fas fa-trash-alt fa-fw-3"></i>
+                         Eliminar
+                     </a>
+                   </td>
+                   <td>&nbsp;</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

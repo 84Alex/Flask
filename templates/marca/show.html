@@ -1,0 +1,51 @@
+{% extends 'dashboard.html'%}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary">
+            <div class="d-flex justify-content-center">
+               <h2 class="mb-3 text-white">
+                   <i class="fas fa-list fa-fw me-1"></i>
+                   <b>Marca</b>&nbsp;-&nbsp;<span>{{ row[1] }}</span>
+               </h2>
+           </div>
+        </div>
+        <div class="card-body">
+           <h4>
+               <span class="badge badge-primary">
+                   Nombre &nbsp;:
+               </span>
+               {{ row[1] }}
+           </h4>
+            <br>
+            <h4>
+               <span class="badge badge-primary">
+                   Descripcion &nbsp;:
+               </span>
+               {{ row[2] }}
+           </h4>
+            <br>
+           <h4>
+              <span class="badge badge-primary">
+                   Fecha de Creacion &nbsp;:
+               </span>
+               {{ row[3] }}
+           </h4>
+            <br>
+            <h4>
+                {% if row[4] == 1 %}
+                <p class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle fa-fw-3"></i>
+                    Activa
+                </p>
+                {% else %}
+                <p class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle fa-fw-3"></i>
+                    Inactiva
+                </p>
+                {% endif %}
+            </h4>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,27 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow p-3 mb-5">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Flask-Demo</a>
+    <a class="navbar-brand text-white" href="#">Flask-Demo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
         </li>
       </ul>
-      <span class="navbar-text">
-        Navbar text with an inline element
-      </span>
     </div>
+    <a class="nav-link text-white justify-content-end" href="{{ url_for('authenticate') }}">
+        <i class="fas fa-sign-in-alt fa-fw-3"></i>
+         <b>Acceder al Sistema</b>
+      </a>
   </div>
 </nav>
 {% endblock %}
